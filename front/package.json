@@ -1,0 +1,22 @@
+{
+  "name": "front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "LGH",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^12.3.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}
