@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`
-  margin-top: 11px;
+  margin-top: 10px;
 `;
 
 const LoginForm = ({ setIsLoggedIn }) => {
@@ -12,11 +12,11 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const [password, setpassword] = useState("");
   // const [passwordCheck, setpasswordCheck] = useState("");
 
-  const onChangeId = useCallback((e) => {
+  const ChangeId = useCallback((e) => {
     setid(e.target.value);
   }, []);
 
-  const onChangePassword = useCallback((e) => {
+  const ChangePassword = useCallback((e) => {
     setpassword(e.target.value);
   }, []);
   const onSubmitForm = useCallback(() => {
@@ -28,7 +28,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       <div>
         <label htmlFor="userId">아이디</label>
         <br />
-        <Input name="userId" value={id} onchange={onChangeId} required />
+        <Input name="userId" value={id} onchange={ChangeId} required />
       </div>
       <div>
         <label htmlFor="userPassword">비밀번호</label>
@@ -37,7 +37,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           name="userPassword"
           type={password}
           value={password}
-          onchange={onChangePassword}
+          onchange={ChangePassword}
           required
         />
       </div>
