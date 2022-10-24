@@ -8,8 +8,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const LoginForm = ({ setIsLoggedIn }) => {
-  const [id, setid] = useState("");
-  const [password, setpassword] = useState("");
+  const [id, setid] = useState();
+  const [password, setpassword] = useState();
   // const [passwordCheck, setpasswordCheck] = useState("");
 
   const ChangeId = useCallback((e) => {
@@ -35,7 +35,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
         <br />
         <Input
           name="userPassword"
-          type={password}
+          type={"password"}
           value={password}
           onchange={ChangePassword}
           required
