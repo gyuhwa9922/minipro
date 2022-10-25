@@ -1,7 +1,10 @@
-import { Avatar, Card } from "antd";
+import { Avatar, Button, Card } from "antd";
 import React from "react";
 
-const UserProfile = () => {
+const UserProfile = ({ setIsLoggedIn }) => {
+  const LogOut = () => {
+    setIsLoggedIn(false);
+  };
   return (
     <Card
       actions={[
@@ -20,6 +23,7 @@ const UserProfile = () => {
       ]}
     >
       <Card.Meta title="lgh" avatar={<Avatar>ss</Avatar>} />
+      <Button onClick={LogOut}>로그아웃</Button>
     </Card>
   );
 };
