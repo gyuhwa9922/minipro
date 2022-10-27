@@ -9,15 +9,15 @@ const UserProfile = ({ setIsLoggedIn }) => {
     <Card
       actions={[
         <div key={"write"}>
-          dsd
+          회원정보 보기
           <br />
         </div>,
         <div key={"followings"}>
-          dsd
+          팔로워
           <br />
         </div>,
         <div key={"followings"}>
-          asd
+          팔로잉
           <br />
         </div>,
       ]}
