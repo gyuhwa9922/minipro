@@ -22,7 +22,7 @@ const UserProfile = ({ setIsLoggedIn }) => {
         </div>,
       ]}
     >
-      <Card.Meta title="lgh" avatar={<Avatar>ss</Avatar>} />
+      <Card.Meta title="lgh" avatar={<Avatar>img</Avatar>} />
       <Button onClick={LogOut}>로그아웃</Button>
     </Card>
   );
