@@ -46,9 +46,10 @@ const AppLayout = ({ children }) => {
         </Col>
         <Col xs={24} md={12}>
           {children}
+          write
         </Col>
         <Col xs={24} md={6}>
-          right
+          menu right
         </Col>
       </Row>
       {children}
