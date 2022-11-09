@@ -52,7 +52,6 @@ const AppLayout = ({ children }) => {
           menu right
         </Col>
       </Row>
-      {children}
     </div>
   );
 };

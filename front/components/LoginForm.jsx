@@ -6,7 +6,9 @@ import styled from "styled-components";
 const ButtonWrapper = styled.div`
   margin-top: 10px;
 `;
-
+const Login = styled(Form)`
+  margin-top: 10px;
+`;
 const LoginForm = ({ setIsLoggedIn }) => {
   const [id, setid] = useState();
   const [password, setpassword] = useState();
@@ -24,7 +26,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
     setIsLoggedIn(true);
   }, [id, password]);
   return (
-    <Form onFinish={onSubmitForm}>
+    <Login onFinish={onSubmitForm}>
       <div>
         <label htmlFor="userId">아이디</label>
         <br />
@@ -51,7 +53,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           </a>
         </Link>
       </ButtonWrapper>
-    </Form>
+    </Login>
   );
 };
 
