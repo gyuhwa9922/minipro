@@ -1,5 +1,7 @@
 import React from "react";
 import AppLayout from "../components/AppLayout";
+import FollowList from "../components/FollowList";
+import NicknameEditForm from "../components/NicknameEditForm";
 
 const profile = () => {
   const followerList = [
