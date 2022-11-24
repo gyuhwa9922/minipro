@@ -1,25 +1,28 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import AppLayout from "../components/AppLayout";
-import { Checkbox, Form, Input } from "antd";
-import Password from "antd/lib/input/Password";
+import { Button, Checkbox, Form, Input } from "antd";
 import useinput from "../hooks/useinput";
 
 const signup = () => {
+  // 아이디
   const [id, onChangeId] = useinput("");
   // const [id, setId] = useState("");
   // const onChangeId = useCallback((e) => {
   //   setId(e.target.value);
   // }, []);
+  // 비밀번호
   const [password, onChangePassword] = useinput("");
   // const [password, setpassword] = useState("");
   // const onChangePassword = useCallback((e) => {
   //   setpassword(e.target.value);
   // }, []);
+  // 닉네임
   const [Nickname, onChangeNickname] = useinput("");
   // const [Nickname, setNickname] = useState("");
   // const onChangeNickname = useCallback((e) => {
   //   setNickname(e.target.value);
   // }, []);
+  // 비밀번호 에러 && 비밀번호 체크
   const [passwordError, setpasswordError] = useState(false);
   const [passwordCheck, setpasswordCheck] = useState("");
   const onChangePasswordCheck = useCallback(
@@ -29,7 +32,35 @@ const signup = () => {
     },
     [password]
   );
+  //약관동의
+  const [term, setterm] = useState("");
+  const [termError, settermError] = useState(true);
+  const ChangeTerm = useCallback((e) => {
+    setterm(e.target.checked);
+    settermError(false);
+  }, []);
+  // 가입 완료시 실행되는 코드
+  const onSubmit = useCallback(() => {
+    if (password !== passwordCheck) {
+      // console.log("flag1");
+      return setpasswordError(true);
+    }
+    if (!termError) {
+      // console.log("flag2");
+      // console.log(termError);
+      return settermError(true);
+    }
+    console.log(id);
+    console.log(Nickname);
+    console.log(password);
+    console.log(term);
+    console.log("flag3");
+  }, []);
 
+  console.log(id);
+  console.log(Nickname);
+  console.log(password);
+  console.log(term);
   return (
     <AppLayout>
       <Form onFinish={onSubmit}>
@@ -54,6 +85,7 @@ const signup = () => {
           <Input
             name="user-password"
             value={password}
+            type={"password"}
             required
             onChange={onChangePassword}
           />
@@ -64,6 +96,7 @@ const signup = () => {
           <Input
             name="user-password-check"
             value={passwordCheck}
+            type={"password"}
             required
             onChange={onChangePasswordCheck}
           />
@@ -74,7 +107,15 @@ const signup = () => {
         <div>
           <Checkbox name="user-term" checked={term} onChange={ChangeTerm}>
             약관동의 확인
+            {termError && (
+              <div style={{ color: "red" }}>약관에 동의하셔야 합니다</div>
+            )}
           </Checkbox>
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <Button type="primary" htmlType="submit">
+            가입하기
+          </Button>
         </div>
       </Form>
     </AppLayout>
