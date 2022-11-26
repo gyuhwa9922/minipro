@@ -5,23 +5,23 @@ import useinput from "../hooks/useinput";
 
 const signup = () => {
   // 아이디
-  const [id, onChangeId] = useinput("");
-  // const [id, setId] = useState("");
-  // const onChangeId = useCallback((e) => {
-  //   setId(e.target.value);
-  // }, []);
+  // const [id, onChangeId] = useinput("");
+  const [id, setId] = useState("");
+  const onChangeId = useCallback((e) => {
+    setId(e.target.value);
+  }, []);
   // 비밀번호
-  const [password, onChangePassword] = useinput("");
-  // const [password, setpassword] = useState("");
-  // const onChangePassword = useCallback((e) => {
-  //   setpassword(e.target.value);
-  // }, []);
+  // const [password, onChangePassword] = useinput("");
+  const [password, setpassword] = useState("");
+  const onChangePassword = useCallback((e) => {
+    setpassword(e.target.value);
+  }, []);
   // 닉네임
-  const [Nickname, onChangeNickname] = useinput("");
-  // const [Nickname, setNickname] = useState("");
-  // const onChangeNickname = useCallback((e) => {
-  //   setNickname(e.target.value);
-  // }, []);
+  // const [Nickname, onChangeNickname] = useinput("");
+  const [Nickname, setNickname] = useState("");
+  const onChangeNickname = useCallback((e) => {
+    setNickname(e.target.value);
+  }, []);
   // 비밀번호 에러 && 비밀번호 체크
   const [passwordError, setpasswordError] = useState(false);
   const [passwordCheck, setpasswordCheck] = useState("");
