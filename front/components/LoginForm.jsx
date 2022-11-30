@@ -32,7 +32,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       <div>
         <label htmlFor="userId">아이디</label>
         <br />
-        <Input name="userId" value={id} onchange={ChangeId} required />
+        <Input name="userId" value={id} onChange={ChangeId} required />
       </div>
       <div>
         <label htmlFor="userPassword">비밀번호</label>
@@ -41,7 +41,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           name="userPassword"
           type={"password"}
           value={password}
-          onchange={ChangePassword}
+          onChange={ChangePassword}
           required
         />
       </div>

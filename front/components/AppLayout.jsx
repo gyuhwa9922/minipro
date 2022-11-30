@@ -55,7 +55,7 @@ const AppLayout = ({ children }) => {
     </div>
   );
 };
-AppLayout.PropTypes = {
+AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 export default AppLayout;
