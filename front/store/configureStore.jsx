@@ -1,13 +1,19 @@
 import { createWrapper } from "next-redux-wrapper";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "../reducers";
+import { composeWithDevTools } from "@redux-devtools/extension";
 
 const configureStore = () => {
-  const store = createStore(reducer);
-  store.dispatch({
-    type: `CHAGE_NICKNAME`,
-    data: "goodman",
-  });
+  const middlewares = [];
+  const enhancer =
+    process.env.NODE_ENV === "production"
+      ? compose(applyMiddleware(...middlewares))
+      : composeWithDevTools(applyMiddleware(...middlewares));
+  const store = createStore(reducer, enhancer);
+  // store.dispatch({
+  //   type: `CHAGE_NICKNAME`,
+  //   data: "goodman",
+  // });
   return store;
 };
 
