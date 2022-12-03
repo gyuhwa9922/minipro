@@ -4,13 +4,17 @@ import Link from "next/link";
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import useinput from "../hooks/useinput";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../reducers";
+
 const ButtonWrapper = styled.div`
   margin-top: 10px;
 `;
 const Login = styled(Form)`
   margin-top: 10px;
 `;
-const LoginForm = ({ setIsLoggedIn }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, ChangeId] = useinput("");
   // const [passwordCheck, setpasswordCheck] = useState("");
 
@@ -25,7 +29,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
   // }, []);
   const onSubmitForm = useCallback(() => {
     console.log(id, password);
-    setIsLoggedIn(true);
+    dispatch(loginAction(id, password));
   }, [id, password]);
   return (
     <Login onFinish={onSubmitForm}>
@@ -59,7 +63,4 @@ const LoginForm = ({ setIsLoggedIn }) => {
   );
 };
 
-LoginForm.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
-};
 export default LoginForm;
