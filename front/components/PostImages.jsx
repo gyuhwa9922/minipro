@@ -1,12 +1,19 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { PlusOutlined } from "@ant-design/icons";
-
+import ImagesCarousel from "../components/ImagesCarousel";
+import { Modal } from "antd";
 const PostImages = ({ images }) => {
   const [showImageZoom, setShowImageZoom] = useState(false);
   const onZoom = useCallback(() => {
     setShowImageZoom(true);
   }, []);
+  // const openModal = () => {
+
+  // };
+  //imagecarousel.jsx 컴포넌트 modal창 open
+  const [modalOpen, setModalOpen] = useState(false);
+
   if (images.length === 1) {
     return (
       <>
@@ -49,7 +56,19 @@ const PostImages = ({ images }) => {
         }}
         onClick={onZoom}
       >
-        <PlusOutlined />
+        <PlusOutlined onClick={() => setModalOpen(true)} />
+        <Modal
+          open={modalOpen}
+          centered
+          onOk={() => setModalOpen(false)}
+          onCancel={() => setModalOpen(false)}
+          width={700}
+          // style={{ backgroundColor: "#000000" }}
+        >
+          <br />
+          <br />
+          <ImagesCarousel images={images} />
+        </Modal>
         <br />
         {images.length - 1}개의 사진 더보기
       </div>
