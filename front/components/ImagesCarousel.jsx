@@ -2,9 +2,12 @@ import React from "react";
 import { Carousel } from "antd";
 import styled from "styled-components";
 
-const RedBorder = styled(Carousel)`
-  .ant-carousel.slick-dots-li-button && {
-    border: 1px solid red;
+const CarouselWrapper = styled(Carousel)`
+  > .slick-dots li button {
+    border: 1px solid black;
+  }
+  > .slick-dots li.slick-active button {
+    background: "none";
   }
 `;
 
@@ -19,13 +22,13 @@ const contentStyle = {
 
 const ImagesCarousel = ({ images }) => {
   return (
-    <RedBorder autoplay>
+    <CarouselWrapper autoplay dotPosition={"right"}>
       {images.map((src, index) => (
         <div>
           <img style={contentStyle} key={index} src={images[index].src} />
         </div>
       ))}
-    </RedBorder>
+    </CarouselWrapper>
   );
 };
 
