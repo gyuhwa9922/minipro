@@ -62,7 +62,7 @@ const PostImages = ({ images }) => {
           centered
           onOk={() => setModalOpen(false)}
           onCancel={() => setModalOpen(false)}
-          width={700}
+          width={500}
           // style={{ backgroundColor: "#000000" }}
         >
           <br />

@@ -17,7 +17,7 @@ const contentStyle = {
   lineHeight: "160px",
   textAlign: "center",
   background: "#000000",
-  width: "650px",
+  width: "450px",
 };
 
 const ImagesCarousel = ({ images }) => {
