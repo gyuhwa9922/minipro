@@ -4,6 +4,7 @@ import reducer from "../reducers";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import thunkMiddleware from "redux-thunk";
 
+// redux middle
 const configureStore = () => {
   const middlewares = [thunkMiddleware];
   const enhancer =
