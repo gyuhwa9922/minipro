@@ -5,18 +5,56 @@ export const initialState = {
   signUpData: {},
   loginData: {},
 };
+
 export const loginAction = (data) => {
-  return {
-    type: "LOG_IN",
-    data,
-  };
-};
-export const logoutAction = () => {
-  return {
-    type: "LOG_OUT",
+  return (dispatch, getState) => {
+    const state = getState();
+    dispatch(loginRequestAction());
+    axios
+      .post("@@@/@@@")
+      .then((res) => {
+        loginSuccessAction(res.data);
+      })
+      .catch((err) => {
+        loginFailedAction(err);
+      });
   };
 };
 
+export const loginRequestAction = (data) => {
+  return {
+    type: "LOG_IN_REQUEST",
+    data,
+  };
+};
+export const loginSuccessAction = (data) => {
+  return {
+    type: "LOG_IN_SUCCESS",
+    data,
+  };
+};
+export const loginFailedAction = (data) => {
+  return {
+    type: "LOG_IN_FAILED",
+    data,
+  };
+};
+export const logoutRequestAction = () => {
+  return {
+    type: "LOG_OUT_REQUEST",
+  };
+};
+
+export const logoutSuccessAction = () => {
+  return {
+    type: "LOG_OUT_SUCCESS",
+  };
+};
+export const logoutFailedAction = () => {
+  return {
+    type: "LOG_OUT_FAILED",
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOG_IN":
