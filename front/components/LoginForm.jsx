@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import useinput from "../hooks/useinput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../reducers/user";
 
 const ButtonWrapper = styled.div`
@@ -15,6 +15,7 @@ const Login = styled(Form)`
 `;
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const { isLoggingIn } = useSelector((state) => state.user);
   const [id, ChangeId] = useinput("");
   // const [passwordCheck, setpasswordCheck] = useState("");
 
@@ -50,7 +51,7 @@ const LoginForm = () => {
         />
       </div>
       <ButtonWrapper>
-        <Button type="primary" htmlType="submit" loading={false}>
+        <Button type="primary" htmlType="submit" loading={isLoggingIn}>
           로그인
         </Button>
         <Link href={"/signup"}>
