@@ -1,5 +1,5 @@
 import axios from "axios";
-import { delay, fork, put, takeLatest } from "redux-saga/effects";
+import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
 
 function logInAPI(data) {
   return axios.post("/api/login", data);
@@ -7,6 +7,7 @@ function logInAPI(data) {
 
 function* logIn(action) {
   try {
+    console.log("flag1");
     yield delay(1000);
     // const result = yield call(logInAPI, action.data);
     yield put({
