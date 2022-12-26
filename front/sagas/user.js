@@ -28,6 +28,7 @@ function logOutAPI() {
 function* logOut() {
   try {
     // const result = yield call(logOutAPI);
+
     yield delay(1000);
     yield put({
       type: "LOG_OUT_SUCCESS",
@@ -42,6 +43,7 @@ function* logOut() {
 }
 
 function* watchLogIn() {
+  console.log("로그인요청");
   yield takeLatest("LOG_IN_REQUEST", logIn);
 }
 function* watchLogOut() {
