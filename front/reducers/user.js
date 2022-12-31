@@ -7,9 +7,8 @@ function logInAPI(data) {
 
 function* logIn(action) {
   try {
-    console.log("flag1");
-    yield delay(1000);
     // const result = yield call(logInAPI, action.data);
+    yield delay(1000);
     yield put({
       type: "LOG_IN_SUCCESS",
       data: action.data,
@@ -17,7 +16,7 @@ function* logIn(action) {
   } catch (err) {
     yield put({
       type: "LOG_IN_FAILED",
-      data: err.response.data,
+      // data: err.response.data,
     });
   }
 }
@@ -28,10 +27,11 @@ function logOutAPI() {
 function* logOut() {
   try {
     // const result = yield call(logOutAPI);
+
     yield delay(1000);
     yield put({
       type: "LOG_OUT_SUCCESS",
-      data: result.data,
+      // data: result.data,
     });
   } catch (err) {
     yield put({
@@ -42,6 +42,7 @@ function* logOut() {
 }
 
 function* watchLogIn() {
+  console.log("로그인요청");
   yield takeLatest("LOG_IN_REQUEST", logIn);
 }
 function* watchLogOut() {
