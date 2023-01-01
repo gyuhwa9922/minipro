@@ -3,6 +3,15 @@ export const initialState = {
   inLoggedIn: false, //로그인이 되어있나?
   isLoggingIn: false, // 로그인 시도
   isLoggingOut: false, // 로그아웃 시도
+  logInLoading: false,
+  logInDone: false,
+  logInError: null,
+  logOutLoading: false,
+  logOutFailed: false,
+  logOutError: null,
+  signUpLoading: false,
+  signUpDone: false,
+  signUpFailed: null,
   user: null,
   signUpData: {},
   loginData: {},
@@ -33,6 +42,15 @@ export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
+
+const dummyUser = (data) => ({
+  ...action.data,
+  nickname: "lgh",
+  id: 1,
+  Posts: [],
+  Followings: [],
+  Followers: [],
+});
 
 // export const
 // export const
@@ -99,7 +117,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: false,
         isLoggedIn: true,
-        user: { ...action.data, nickname: "lgh" },
+        user: dummyUser(action.data),
       };
     case LOG_IN_FAILED:
       return {
