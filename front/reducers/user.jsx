@@ -110,19 +110,20 @@ const reducer = (state = initialState, action) => {
       console.log("flag1");
       return {
         ...state,
-        isLoggingIn: true,
+        logInLoading: true,
+        logInError: null,
       };
     case LOG_IN_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: true,
+        logInLoading: false,
+        logInDone: true,
         user: dummyUser(action.data),
       };
     case LOG_IN_FAILED:
       return {
         ...state,
-        isLoggingIn: false,
+        logInLoading: false,
         isLoggedIn: false,
       };
     case LOG_OUT_REQUEST:
