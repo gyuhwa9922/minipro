@@ -1,17 +1,14 @@
 // 유저
 export const initialState = {
-  inLoggedIn: false, //로그인이 되어있나?
-  isLoggingIn: false, // 로그인 시도
-  isLoggingOut: false, // 로그아웃 시도
-  logInLoading: false,
+  logInLoading: false, // 로그인 시도중
   logInDone: false,
   logInError: null,
-  logOutLoading: false,
-  logOutFailed: false,
+  logOutLoading: false, // 로그아웃 시도중
+  logOutDone: false,
   logOutError: null,
-  signUpLoading: false,
+  signUpLoading: false, // 회원가입 시도중
   signUpDone: false,
-  signUpFailed: null,
+  signUpError: null,
   user: null,
   signUpData: {},
   loginData: {},
@@ -24,9 +21,9 @@ export const LOG_OUT_REQUEST = "LOG_OUT_REQUEST";
 export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
 export const LOG_OUT_FAILED = "LOG_OUT_FAILED";
 
-export const SIGN_OUT_REQUEST = "SIGN_OUT_REQUEST";
-export const SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS";
-export const SIGN_OUT_FAILED = "SIGN_OUT_FAILED";
+export const SIGN_UP_REQUEST = "SIGN_OUT_REQUEST";
+export const SIGN_UP_SUCCESS = "SIGN_OUT_SUCCESS";
+export const SIGN_UP_FAILED = "SIGN_OUT_FAILED";
 
 export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
 export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
@@ -44,7 +41,7 @@ export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
 const dummyUser = (data) => ({
-  ...action.data,
+  ...data,
   nickname: "lgh",
   id: 1,
   Posts: [],
@@ -124,24 +121,46 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         logInLoading: false,
-        isLoggedIn: false,
+        logInError: action.error,
       };
     case LOG_OUT_REQUEST:
       return {
         ...state,
-        isLoggingOut: true,
+        logOutLoading: true,
+        logOutDone: false,
+        logOutError: null,
       };
     case LOG_OUT_SUCCESS:
       return {
         ...state,
-        isLoggingOut: false,
-        isLoggedIn: false,
+        logOutLoading: true,
+        logOutDone: true,
         user: null,
       };
     case LOG_OUT_FAILED:
       return {
         ...state,
-        isLoggingOut: false,
+        logOutLoading: false,
+        logOutError: action.error,
+      };
+    case SIGN_UP_REQUEST:
+      return {
+        ...state,
+        signUpLoading: true,
+        signUpDone: false,
+        signUpError: null,
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        signUpLoading: true,
+        signUpDone: true,
+      };
+    case SIGN_UP_FAILED:
+      return {
+        ...state,
+        signUpLoading: false,
+        signUpError: action.error,
       };
     default:
       return state;
