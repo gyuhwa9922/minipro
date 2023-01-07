@@ -81,6 +81,20 @@ export const loginRequestAction = (data) => {
     data,
   };
 };
+export const loginSuccessAction = (data) => {
+  console.log("로그인요청");
+  return {
+    type: LOG_IN_SUCCESS,
+    data,
+  };
+};
+export const loginFailedAction = (data) => {
+  console.log("로그인요청");
+  return {
+    type: LOG_IN_FAILED,
+    data,
+  };
+};
 
 export const logoutRequestAction = () => {
   console.log("로그아웃 요청");
@@ -90,7 +104,7 @@ export const logoutRequestAction = () => {
 };
 
 export const logoutSuccessAction = () => {
-  console.log("로그인 성공");
+  console.log("로그아웃 성공");
   return {
     type: LOG_OUT_SUCCESS,
   };
@@ -109,6 +123,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         logInLoading: true,
         logInError: null,
+        logInDone: false,
       };
     case LOG_IN_SUCCESS:
       return {
@@ -133,7 +148,7 @@ const reducer = (state = initialState, action) => {
     case LOG_OUT_SUCCESS:
       return {
         ...state,
-        logOutLoading: true,
+        logOutLoading: false,
         logOutDone: true,
         user: null,
       };
@@ -153,7 +168,7 @@ const reducer = (state = initialState, action) => {
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        signUpLoading: true,
+        signUpLoading: false,
         signUpDone: true,
       };
     case SIGN_UP_FAILED:

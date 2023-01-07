@@ -36,16 +36,30 @@ export const initialState = {
     },
   ],
   imagePaths: [],
-  postAdded: false,
+  addPostLoading: false,
+  addPostDone: false,
+  addPostError: null,
+  addCommnetLoading: false,
+  addCommnetDone: false,
+  addCommnetError: null,
 };
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAILED = "ADD_POST_FAILED";
 
-// export const addPost = {
-//   type: ADD_POST,
-// };
+export const ADD_COMMENT_REQUEST = "ADD_POST_REQUEST";
+export const ADD_COMMENT_SUCCESS = "ADD_POST_SUCCESS";
+export const ADD_COMMENT_FAILED = "ADD_POST_FAILED";
+
+export const addPost = (data) => ({
+  type: ADD_POST_REQUEST,
+  data,
+});
+export const addComment = (data) => ({
+  type: ADD_COMMENT_REQUEST,
+  data,
+});
 const dummyPost = {
   id: 1,
   content: "dummy",
@@ -60,15 +74,45 @@ const dummyPost = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST_REQUEST:
-      return {};
+      return {
+        ...state,
+        addPostLoading: true,
+        addPostDone: false,
+        addPostError: null,
+      };
     case ADD_POST_SUCCESS:
       return {
         ...state,
         mainPosts: [dummyPost, ...state.mainPosts],
-        postAdded: true,
+        addPostDone: true,
+        addPostError: null,
+        addPostLoading: false,
       };
     case ADD_POST_FAILED:
-      return {};
+      return {
+        ...state,
+        addPostLoading: false,
+        addPostError: action.error,
+      };
+    case ADD_COMMENT_REQUEST:
+      return {
+        ...state,
+        addCommentLoading: true,
+        addCommentDone: false,
+        addCommentError: null,
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        addCommentLoading: false,
+        addCommentDone: true,
+      };
+    case ADD_COMMENT_FAILED:
+      return {
+        ...state,
+        addCommentLoading: false,
+        addCommentError: action.error,
+      };
     default:
       return state;
   }
