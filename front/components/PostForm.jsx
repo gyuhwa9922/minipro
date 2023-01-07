@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../reducers/post";
 
@@ -10,16 +10,19 @@ const PostForm = () => {
   const ImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
-
+  useEffect(() => {
+    if (addPostDone) {
+      //글 작성시 비워주기
+      setText("");
+    }
+  }, [addPostDone]);
   const dispatch = useDispatch();
   const ChangeText = useCallback((e) => {
     setText(e.target.value);
   }, []);
   const onSubmit = useCallback(() => {
-    dispatch(addPost);
-    //글 작성시 비워주기
-    setText("");
-  }, []);
+    dispatch(addPost(text));
+  }, [text]);
   return (
     <Form
       style={{ margin: "10px 0 20px" }}

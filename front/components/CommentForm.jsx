@@ -2,18 +2,31 @@ import { Button, Form, Input } from "antd";
 import React, { useCallback } from "react";
 import useinput from "../hooks/useinput";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
   const id = useSelector((state) => state.user?.id);
-  const [commentText, modicomment] = useinput("");
+  const { addCommentDone } = useSelector((state) => state.post);
+  const [commentText, onChangeText, setCommentText] = useinput("");
   const submitComment = useCallback(() => {
     console.log(post.id, commentText);
+    //동적action creater
+    dispatch({
+      type: ADD_COMMENT_REQUEST,
+      data: { content: commentText, postId: post.id, userId: id },
+    });
   }, [commentText]);
+  useEffect(() => {
+    if (addCommentDone) {
+      //글 작성시 비워주기
+      setCommentText("");
+    }
+  }, [addCommentDone]);
   return (
     <Form onFinish={submitComment}>
       <Form.Item>
-        <Input.TextArea value={commentText} onChange={modicomment} row={4} />
+        <Input.TextArea value={commentText} onChange={onChangeText} row={4} />
         <Button type="primary" htmlType="submit">
           작성
         </Button>
