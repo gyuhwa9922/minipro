@@ -2,14 +2,20 @@ import React, { useCallback, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import { Button, Checkbox, Form, Input } from "antd";
 import useinput from "../hooks/useinput";
+import { SIGN_UP_REQUEST } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const signup = () => {
+  const dispatch = useDispatch();
+  const { signUpLoading } = useSelector((state) => state.user);
   // 아이디
   const [id, onChangeId] = useinput("");
   // const [id, setId] = useState("");
   // const onChangeId = useCallback((e) => {
   //   setId(e.target.value);
   // }, []);
+  //이메일
+  const [email, onChangeEmail] = useinput("");
   // 비밀번호
   const [password, onChangePassword] = useinput("");
   // const [password, setpassword] = useState("");
@@ -52,10 +58,15 @@ const signup = () => {
     }
     console.log(id);
     console.log(Nickname);
+    console.log(email);
     console.log(password);
     console.log(term);
     console.log("flag3");
-  }, [password, passwordCheck, term]);
+    dispatchEvent({
+      type: SIGN_UP_REQUEST,
+      data: { email, id, password, Nickname },
+    });
+  }, [email, password, passwordCheck, term]);
 
   return (
     <AppLayout>
@@ -64,6 +75,17 @@ const signup = () => {
           <label htmlFor="user-id">아이디</label>
           <br />
           <Input name="user-id" value={id} required onChange={onChangeId} />
+        </div>
+        <div>
+          <label htmlFor="user-email">이메일</label>
+          <br />
+          <Input
+            name="user-email"
+            value={email}
+            type="email"
+            required
+            onChange={onChangeEmail}
+          />
         </div>
         <div>
           <label htmlFor="user-nickname">닉네임</label>
