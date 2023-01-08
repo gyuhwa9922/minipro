@@ -1,11 +1,12 @@
 import { Button, Form, Input } from "antd";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import useinput from "../hooks/useinput";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.user?.id);
   const { addCommentDone } = useSelector((state) => state.post);
   const [commentText, onChangeText, setCommentText] = useinput("");
@@ -17,6 +18,7 @@ const CommentForm = ({ post }) => {
       data: { content: commentText, postId: post.id, userId: id },
     });
   }, [commentText]);
+
   useEffect(() => {
     if (addCommentDone) {
       //글 작성시 비워주기

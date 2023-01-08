@@ -6,6 +6,7 @@ import { PropTypes } from "prop-types";
 import useinput from "../hooks/useinput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../reducers/user";
+import { useEffect } from "react";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -28,6 +29,11 @@ const LoginForm = () => {
   // const ChangePassword = useCallback((e) => {
   //   setpassword(e.target.value);
   // }, []);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     Router.back();
+  //   }
+  // }, [isLoggedIn]);
   const onSubmitForm = useCallback(() => {
     console.log(userId, password);
     dispatch(loginRequestAction(userId, password));
