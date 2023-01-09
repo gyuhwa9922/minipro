@@ -31,9 +31,7 @@ function* logIn(action) {
     });
   }
 }
-function logInAPI(data) {
-  return axios.post("/api/login", data);
-}
+
 // logout
 function logOutAPI() {
   return axios.post("/api/logout");
@@ -41,7 +39,6 @@ function logOutAPI() {
 function* logOut() {
   try {
     // const result = yield call(logOutAPI);
-
     yield delay(1000);
     yield put({
       type: LOG_OUT_SUCCESS,
@@ -55,7 +52,7 @@ function* logOut() {
   }
 }
 function signUpAPI(data) {
-  return axios.post("/api/signUp");
+  return axios.post("/api/signUp", data);
 }
 function* signUp() {
   try {
@@ -82,6 +79,7 @@ function* watchLogOut() {
   yield takeLatest(LOG_OUT_REQUEST, logOut);
 }
 function* watchSignUp() {
+  console.log("회원가입 요청");
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 export default function* userSaga() {
