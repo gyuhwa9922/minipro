@@ -60,16 +60,16 @@ export const addComment = (data) => ({
   type: ADD_COMMENT_REQUEST,
   data,
 });
-const dummyPost = {
-  id: 1,
-  content: "dummy",
+const dummyPost = (data) => ({
+  id: 2,
+  content: data,
   User: {
     id: 1,
     nickname: "lgh",
   },
   Images: [],
   Comments: [],
-};
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -83,9 +83,9 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostDone: true,
-        addPostError: null,
+        // addPostError: null,
         addPostLoading: false,
       };
     case ADD_POST_FAILED:
