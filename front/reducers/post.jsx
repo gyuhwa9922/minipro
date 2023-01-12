@@ -1,3 +1,5 @@
+import shortId from "shortid";
+
 //게시물
 export const initialState = {
   mainPosts: [
@@ -61,7 +63,7 @@ export const addComment = (data) => ({
   data,
 });
 const dummyPost = (data) => ({
-  id: 2,
+  id: shortId.generate(),
   content: data,
   User: {
     id: 1,
