@@ -14,7 +14,7 @@ const SearchInput = styled(Input.Search)`
 `;
 
 const AppLayout = ({ children }) => {
-  const usingUser = useSelector((state) => state.user.usingUser);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <div>
@@ -40,7 +40,7 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {usingUser ? <UserProfile /> : <LoginForm />}
+          {user ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
