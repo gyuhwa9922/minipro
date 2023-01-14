@@ -121,12 +121,11 @@ export const logoutFailedAction = () => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST:
-      console.log("flag1");
       return {
         ...state,
         logInLoading: true,
-        logInError: null,
         logInDone: false,
+        logInError: null,
       };
     case LOG_IN_SUCCESS:
       return {

@@ -50,16 +50,12 @@ export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAILED = "ADD_POST_FAILED";
 
-export const ADD_COMMENT_REQUEST = "ADD_POST_REQUEST";
-export const ADD_COMMENT_SUCCESS = "ADD_POST_SUCCESS";
-export const ADD_COMMENT_FAILED = "ADD_POST_FAILED";
+export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAILED = "ADD_COMMENT_FAILED";
 
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
-  data,
-});
-export const addComment = (data) => ({
-  type: ADD_COMMENT_REQUEST,
   data,
 });
 const dummyPost = (data) => ({
@@ -71,6 +67,18 @@ const dummyPost = (data) => ({
   },
   Images: [],
   Comments: [],
+});
+export const addComment = (data) => ({
+  type: ADD_COMMENT_REQUEST,
+  data,
+});
+const dummyComment = (data) => ({
+  id: shortId.generate(),
+  content: data,
+  User: {
+    id: shortId,
+    nickname: "lgh",
+  },
 });
 
 const reducer = (state = initialState, action) => {
@@ -87,7 +95,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostDone: true,
-        // addPostError: null,
         addPostLoading: false,
       };
     case ADD_POST_FAILED:
@@ -104,8 +111,17 @@ const reducer = (state = initialState, action) => {
         addCommentError: null,
       };
     case ADD_COMMENT_SUCCESS:
+      const postIndex = state.mainPosts.findIndex(
+        (v) => v.id === action.data.postId
+      );
+      const post = state.mainPosts[postIndex];
+      post.Comments = [dummyComment(action.data.content), ...post.Comments];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIndex] = { ...post, Comments };
+
       return {
         ...state,
+        mainPosts,
         addCommentLoading: false,
         addCommentDone: true,
       };
