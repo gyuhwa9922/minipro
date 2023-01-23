@@ -7,24 +7,29 @@ const PostForm = () => {
   const { imagePaths, addPostDone, addPostLoading } = useSelector(
     (state) => state.post
   );
-  const [text, setText] = useState("");
+  const [text, setText] = useState();
   const imageInput = useRef();
   const ImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
 
-  useEffect(() => {
-    if (addPostDone) {
-      //글 작성시 비워주기
-      console.log("addpostdone");
-      setText("");
-    }
-  }, [addPostDone]);
+  // useEffect(() => {
+  //   if (addPostDone) {
+  //     //글 작성시 비워주기
+  //     console.log("addpostdone");
+  //     setText("");
+  //   }
+  // }, [addPostDone]);
 
   const dispatch = useDispatch();
   const ChangeText = useCallback((e) => {
+    console.log(text);
     setText(e.target.value);
   }, []);
+  // const ChangeText = (e) => {
+  //   console.log(text);
+  //   setText(e.target.value);
+  // };
   const onSubmit = useCallback(() => {
     dispatch(
       addPost(text)
@@ -33,6 +38,7 @@ const PostForm = () => {
       //   data: text,
       // }
     );
+    setText("");
   }, [text]);
   return (
     <Form

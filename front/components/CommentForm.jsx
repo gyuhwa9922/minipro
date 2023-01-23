@@ -8,7 +8,9 @@ import { ADD_COMMENT_REQUEST } from "../reducers/post";
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user?.id);
-  const { addCommentDone } = useSelector((state) => state.post);
+  const { addCommentDone, addCommentLoading } = useSelector(
+    (state) => state.post
+  );
   const [commentText, onChangeText, setCommentText] = useinput("");
   const submitComment = useCallback(() => {
     console.log(post.id, commentText);
@@ -17,7 +19,7 @@ const CommentForm = ({ post }) => {
       type: ADD_COMMENT_REQUEST,
       data: { content: commentText, postId: post.id, userId: id },
     });
-  }, [commentText]);
+  }, [commentText, id]);
 
   useEffect(() => {
     if (addCommentDone) {
@@ -29,7 +31,7 @@ const CommentForm = ({ post }) => {
     <Form onFinish={submitComment}>
       <Form.Item>
         <Input.TextArea value={commentText} onChange={onChangeText} row={4} />
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={addCommentLoading}>
           작성
         </Button>
       </Form.Item>

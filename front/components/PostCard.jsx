@@ -22,10 +22,11 @@ const PostCard = ({ post }) => {
   const HeartChage = useCallback(() => {
     setIsLiked((prev) => !prev);
   }, []);
-  const [commentOpen, setCommentOpne] = useState(false);
+  const [commentOpen, setCommentOpen] = useState(false);
   const CommentToggle = useCallback(() => {
-    setCommentOpne((prev) => !prev);
+    setCommentOpen((prev) => !prev);
   }, []);
+  console.log(post.content);
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
