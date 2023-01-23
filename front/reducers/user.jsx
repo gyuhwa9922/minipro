@@ -43,24 +43,23 @@ export const UNFOLLOW_FAILED = "UNFOLLOW_FAILED";
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
+// export const
+// export const
+// export const
+// export const
+// export const
+// export const
+// export const
+// export const
+// export const
 const dummyUser = (data) => ({
   ...data,
   nickname: "lgh",
   id: 1,
-  Posts: [],
+  Posts: [{ id: 1 }],
   Followings: [],
   Followers: [],
 });
-
-// export const
-// export const
-// export const
-// export const
-// export const
-// export const
-// export const
-// export const
-// export const
 
 export const loginAction = (data) => {
   return (dispatch, getState) => {
@@ -197,6 +196,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         changeNicknameLoading: false,
         changeNicknameError: action.error,
+      };
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          Posts: [{ id: action.data }, ...state.user.Posts],
+        },
       };
     default:
       return state;
