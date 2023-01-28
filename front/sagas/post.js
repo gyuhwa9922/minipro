@@ -8,10 +8,11 @@ import {
   ADD_POST_FAILED,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
+  REMOVE_POST_FAILED,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
 } from "../reducers/post";
-import { ADD_POST_TO_ME } from "../reducers/user";
+import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
 
 function addPostAPI(data) {
   return axios.post("/api/post", data);
@@ -42,28 +43,24 @@ function* addPost(action) {
 }
 
 function removePostAPI(data) {
-  return axios.post("/api/post", data);
+  return axios.delete("/api/post", data);
 }
 
 function* removePost(action) {
   try {
     // const result = yield call(addPostAPI, action.data);
     yield delay(1000);
-    const id = shortid.generate();
     yield put({
       type: REMOVE_POST_SUCCESS,
-      data: {
-        id,
-        content: action.data,
-      },
+      data: action.data,
     });
     yield put({
-      type: ADD_POST_TO_ME,
-      data: id,
+      type: REMOVE_POST_OF_ME,
+      data: action.data,
     });
   } catch (err) {
     yield put({
-      type: ADD_POST_FAILED,
+      type: REMOVE_POST_FAILED,
       data: err.response.data,
     });
   }
@@ -101,5 +98,5 @@ function* watchAddCommnet() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost), fork(watchAddCommnet)]);
+  yield all([fork(watchAddPost), fork(watchAddCommnet), fork(watchRemovePost)]);
 }
