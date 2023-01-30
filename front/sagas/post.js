@@ -8,12 +8,35 @@ import {
   ADD_POST_FAILED,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
+  generateDummyPost,
+  LOAD_POST_FAILED,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS,
   REMOVE_POST_FAILED,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
 } from "../reducers/post";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
 
+function loadPostAPI(data) {
+  return axios.post("/api/post", data);
+}
+
+function* loadPost(action) {
+  try {
+    // const result = yield call(loadPostAPI, action.data);
+    yield delay(1000);
+    yield put({
+      type: LOAD_POST_SUCCESS,
+      data: generateDummyPost(10),
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_POST_FAILED,
+      data: err.response.data,
+    });
+  }
+}
 function addPostAPI(data) {
   return axios.post("/api/post", data);
 }
@@ -90,6 +113,9 @@ function* addComment(action) {
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
+function* watchLoadPost() {
+  yield takeLatest(LOAD_POST_REQUEST, loadPost);
+}
 function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
@@ -98,5 +124,10 @@ function* watchAddCommnet() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost), fork(watchAddCommnet), fork(watchRemovePost)]);
+  yield all([
+    fork(watchAddPost),
+    fork(watchAddCommnet),
+    fork(watchRemovePost),
+    fork(watchLoadPost),
+  ]);
 }
