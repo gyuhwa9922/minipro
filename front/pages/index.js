@@ -1,14 +1,36 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../components/AppLayout";
 import PostCard from "../components/PostCard";
 import PostForm from "../components/PostForm";
+import { LOAD_POST_REQUEST } from "../reducers/post";
 import user from "../reducers/user";
+
 const Home = () => {
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: LOAD_POST_REQUEST,
+    });
+  }, []);
+  useEffect(() => {
+    function onScroll() {
+      console.log(
+        window.scrollY,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight
+      );
+    }
+    window.addEventListener("scroll", onscroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+  const { user } = useSelector((state) => state.user);
   const { mainPosts } = useSelector((state) => state.post);
   return (
     <AppLayout>
-      {isLoggedIn && <PostForm />}
+      {user && <PostForm />}
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

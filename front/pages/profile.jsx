@@ -6,15 +6,14 @@ import FollowList from "../components/FollowList";
 import NicknameEditForm from "../components/NicknameEditForm";
 import Router from "next/router";
 
- const profile = () => {
+const profile = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if(!(user $$ user.id)) {
-      Router.push('/');
+    if (!(user && user.id)) {
+      Router.push("/");
     }
-  });
-
+  }, [user && user.id]);
   if (!user) {
     return null;
   }
