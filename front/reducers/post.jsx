@@ -98,7 +98,7 @@ export const generateDummyPost = (number) =>
 //concat은 기존 배열에 합쳐서 새 배열을 반환함
 //fill은 Array.fill(value, start, end)
 // 배열의 시작부터 끝까지 value로 채움
-initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
+// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
 
 export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
 export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
