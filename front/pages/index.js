@@ -8,6 +8,9 @@ import user from "../reducers/user";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { mainPosts, hasMorePost } = useSelector((state) => state.post);
+
   useEffect(() => {
     dispatch({
       type: LOAD_POST_REQUEST,
@@ -21,13 +24,21 @@ const Home = () => {
         document.documentElement.scrollHeight
       );
     }
+    if (
+      window.scrollY + document.documentElement.clientHeight >
+      document.documentElement.scrollHeight - 300
+    ) {
+      if (hasMorePost) {
+        dispatch({
+          type: LOAD_POST_REQUEST,
+        });
+      }
+    }
     window.addEventListener("scroll", onscroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
-  const { user } = useSelector((state) => state.user);
-  const { mainPosts } = useSelector((state) => state.post);
+  }, [hasMorePost]);
   return (
     <AppLayout>
       {user && <PostForm />}
