@@ -60,37 +60,41 @@ export const initialState = {
   addCommnetError: null,
 };
 
-export const generateDummyPost = (number) =>
+export const generateDummyPost = () =>
   Array(20)
     .fill()
-    .map((v, i) => ({
+    .map(() => ({
       id: shortId.generate(),
       User: {
         id: shortId.generate(),
-        nickname: faker.internet.userName(),
+        nickname: "lgh",
+        // faker.internet.userName(),
       },
-      content: faker.lorem.paragraph(),
+      content: "멋있어요",
+      // faker.lorem.paragraph(),
       Images: [
         {
-          id: shortId.generate(),
+          // id: shortId.generate(),
           // src: faker.image.cats(),
         },
         {
-          id: shortId.generate(),
+          // id: shortId.generate(),
           // src: faker.image.avatar(),
         },
         {
-          id: shortId.generate(),
+          // id: shortId.generate(),
           // src: faker.image.nature(),
         },
       ],
       Comments: [
         {
-          id: shortId.generate(),
           User: {
-            nickname: faker.internet.userName(),
+            id: shortId.generate(),
+            nickname: "lgh",
+            // faker.internet.userName(),
           },
-          content: faker.animal.cat(),
+          content: "lgh",
+          // faker.animal.cat()
         },
       ],
     }));
@@ -98,7 +102,7 @@ export const generateDummyPost = (number) =>
 //concat은 기존 배열에 합쳐서 새 배열을 반환함
 //fill은 Array.fill(value, start, end)
 // 배열의 시작부터 끝까지 value로 채움
-// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
+initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
 
 export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
 export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
