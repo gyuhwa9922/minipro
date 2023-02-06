@@ -60,8 +60,8 @@ export const initialState = {
   addCommnetError: null,
 };
 
-export const generateDummyPost = () =>
-  Array(20)
+export const generateDummyPost = (number) =>
+  Array(number)
     .fill()
     .map(() => ({
       id: shortId.generate(),
@@ -73,18 +73,18 @@ export const generateDummyPost = () =>
       content: "멋있어요",
       // faker.lorem.paragraph(),
       Images: [
-        {
-          // id: shortId.generate(),
-          // src: faker.image.cats(),
-        },
-        {
-          // id: shortId.generate(),
-          // src: faker.image.avatar(),
-        },
-        {
-          // id: shortId.generate(),
-          // src: faker.image.nature(),
-        },
+        // {
+        //   // id: shortId.generate(),
+        //   // src: faker.image.cats(),
+        // },
+        // {
+        //   // id: shortId.generate(),
+        //   // src: faker.image.avatar(),
+        // },
+        // {
+        //   // id: shortId.generate(),
+        //   // src: faker.image.nature(),
+        // },
       ],
       Comments: [
         {
@@ -102,7 +102,7 @@ export const generateDummyPost = () =>
 //concat은 기존 배열에 합쳐서 새 배열을 반환함
 //fill은 Array.fill(value, start, end)
 // 배열의 시작부터 끝까지 value로 채움
-initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
+// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
 
 export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
 export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
@@ -170,9 +170,9 @@ const reducer = (state = initialState, action) => {
         draft.loadPostError = null;
         break;
       case LOAD_POST_SUCCESS:
-        draft.mainPosts.unshift(dummyPost(action.data));
-        draft.loadPostDone = true;
         draft.loadPostLoading = false;
+        draft.loadPostDone = true;
+        draft.mainPosts.unshift(dummyPost(action.data));
         draft.hasMorePost = draft.mainPosts.length < 50;
         break;
       case LOAD_POST_FAILED:
@@ -204,7 +204,6 @@ const reducer = (state = initialState, action) => {
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;
-
       case ADD_COMMENT_FAILED:
         draft.addCommentLoading = false;
         draft.addCommentError = action.error;
