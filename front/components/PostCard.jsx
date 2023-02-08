@@ -11,12 +11,15 @@ import {
 } from "@ant-design/icons";
 import ButtonGroup from "antd/lib/button/button-group";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
 import PostCardContent from "./PostCardContent";
+import { REMOVE_POST_REQUEST } from "../reducers/post";
 
 const PostCard = ({ post }) => {
+  const dispatch = useDispatch();
+  const { removePostLoading } = useSelector((state) => state.post);
   const id = useSelector((state) => state.user.user?.id);
   const [isLiked, setIsLiked] = useState(false);
   const HeartChage = useCallback(() => {
@@ -26,6 +29,13 @@ const PostCard = ({ post }) => {
   const CommentToggle = useCallback(() => {
     setCommentOpen((prev) => !prev);
   }, []);
+  const onRemovePost = useCallback(() => {
+    dispatch({
+      type: REMOVE_POST_REQUEST,
+      data: post.id,
+    });
+  }, []);
+  // console.log(post);
   console.log(post.content);
   return (
     <div style={{ marginBottom: 10 }}>
@@ -44,13 +54,18 @@ const PostCard = ({ post }) => {
           ),
           <MessageOutlined key={"comment"} onClick={CommentToggle} />,
           <Popover
-            key={"popover"}
+            key={"more"}
             content={
               <ButtonGroup>
                 {id && post.User.id === id ? (
                   <>
                     <Button type="primary">수정</Button>
-                    <Button type="primary" danger>
+                    <Button
+                      type="primary"
+                      loading={removePostLoading}
+                      onClick={onRemovePost}
+                      danger
+                    >
                       삭제
                     </Button>
                   </>
