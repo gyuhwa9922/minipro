@@ -150,20 +150,6 @@ const dummyComment = (data) => ({
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
-      case ADD_POST_REQUEST:
-        draft.addPostLoading = true;
-        draft.addPostDone = false;
-        draft.addPostError = null;
-        break;
-      case ADD_POST_SUCCESS:
-        draft.mainPosts = action.data.concat(draft.mainPosts);
-        draft.addPostDone = true;
-        draft.addPostLoading = false;
-        break;
-      case ADD_POST_FAILED:
-        draft.addPostLoading = false;
-        draft.addPostError = action.error;
-        break;
       case LOAD_POST_REQUEST:
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
@@ -172,12 +158,26 @@ const reducer = (state = initialState, action) => {
       case LOAD_POST_SUCCESS:
         draft.loadPostLoading = false;
         draft.loadPostDone = true;
-        draft.mainPosts.unshift(dummyPost(action.data));
+        draft.mainPosts = action.data.concat(draft.mainPosts);
         draft.hasMorePost = draft.mainPosts.length < 50;
         break;
       case LOAD_POST_FAILED:
         draft.loadPostLoading = false;
         draft.loadPostError = action.error;
+        break;
+      case ADD_POST_REQUEST:
+        draft.addPostLoading = true;
+        draft.addPostDone = false;
+        draft.addPostError = null;
+        break;
+      case ADD_POST_SUCCESS:
+        draft.addPostLoading = false;
+        draft.addPostDone = true;
+        draft.mainPosts.unshift(dummyPost(action.data));
+        break;
+      case ADD_POST_FAILED:
+        draft.addPostLoading = false;
+        draft.addPostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;
