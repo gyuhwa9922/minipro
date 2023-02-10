@@ -55,9 +55,9 @@ export const initialState = {
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
-  addCommnetLoading: false,
-  addCommnetDone: false,
-  addCommnetError: null,
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: null,
 };
 
 export const generateDummyPost = (number) =>
@@ -67,34 +67,30 @@ export const generateDummyPost = (number) =>
       id: shortId.generate(),
       User: {
         id: shortId.generate(),
-        nickname: "lgh",
-        // faker.internet.userName(),
+        nickname: faker.internet.userName(),
       },
-      content: "멋있어요",
-      // faker.lorem.paragraph(),
+      content: faker.lorem.paragraph(),
       Images: [
         // {
-        //   // id: shortId.generate(),
-        //   // src: faker.image.cats(),
+        //   id: shortId.generate(),
+        //   src: faker.image.cats(),
         // },
         // {
-        //   // id: shortId.generate(),
-        //   // src: faker.image.avatar(),
+        //   id: shortId.generate(),
+        //   src: faker.image.avatar(),
         // },
         // {
-        //   // id: shortId.generate(),
-        //   // src: faker.image.nature(),
+        //   id: shortId.generate(),
+        //   src: faker.image.nature(),
         // },
       ],
       Comments: [
         {
           User: {
             id: shortId.generate(),
-            nickname: "lgh",
-            // faker.internet.userName(),
+            nickname: faker.internet.userName(),
           },
-          content: "lgh",
-          // faker.animal.cat()
+          content: faker.animal.cat(),
         },
       ],
     }));
