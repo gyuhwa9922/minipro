@@ -35,8 +35,7 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, []);
-  // console.log(post);
-  console.log(post.content);
+
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
