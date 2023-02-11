@@ -11,7 +11,6 @@ const Home = () => {
   const { mainPosts, hasMorePost, loadPostLoading } = useSelector(
     (state) => state.post
   );
-  // console.log(mainPosts);
 
   useEffect(() => {
     dispatch({
@@ -21,11 +20,20 @@ const Home = () => {
 
   useEffect(() => {
     function onScroll() {
+      // console.log(
+      //   window.scrollY,
+      //   document.documentElement.clientHeight,
+      //   document.documentElement.scrollHeight
+      // );
+      // console.log(
+      //   window.scrollY + document.documentElement.clientHeight ===
+      //     document.documentElement.scrollHeight - 300
+      // );
       if (
-        window.scrollY + document.documentElement.clientHeight ===
+        window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - 300
       ) {
-        console.log("게시물 로드중");
+        console.log("범위 안이야");
         if (hasMorePost) {
           dispatch({
             type: LOAD_POST_REQUEST,
@@ -37,7 +45,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, [mainPosts, hasMorePost, loadPostLoading]);
+  }, [hasMorePost]);
 
   return (
     <AppLayout>
