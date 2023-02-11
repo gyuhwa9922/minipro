@@ -1,7 +1,7 @@
 import shortId from "shortid";
 import produce from "immer";
 import { faker } from "@faker-js/faker";
-import { number } from "prop-types";
+
 //게시물
 export const initialState = {
   mainPosts: [
@@ -71,18 +71,18 @@ export const generateDummyPost = (number) =>
       },
       content: faker.lorem.paragraph(),
       Images: [
-        // {
-        //   id: shortId.generate(),
-        //   src: faker.image.cats(),
-        // },
-        // {
-        //   id: shortId.generate(),
-        //   src: faker.image.avatar(),
-        // },
-        // {
-        //   id: shortId.generate(),
-        //   src: faker.image.nature(),
-        // },
+        {
+          id: shortId.generate(),
+          src: faker.image.cats(),
+        },
+        {
+          id: shortId.generate(),
+          src: faker.image.avatar(),
+        },
+        {
+          id: shortId.generate(),
+          src: faker.image.nature(),
+        },
       ],
       Comments: [
         {
@@ -120,6 +120,7 @@ export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
   data,
 });
+
 const dummyPost = (data) => ({
   id: data.id,
   content: data.content,
@@ -130,21 +131,24 @@ const dummyPost = (data) => ({
   Images: [],
   Comments: [],
 });
+
 export const addComment = (data) => ({
   type: ADD_COMMENT_REQUEST,
   data,
 });
+
 const dummyComment = (data) => ({
   id: shortId.generate(),
   content: data,
   User: {
     id: 1,
-    nickname: "lgh",
+    nickname: "lgH",
   },
 });
+
 //이전상태를 액션을 통해 다음 상태로 만들어내는 함수(불변성을 지키며)
-const reducer = (state = initialState, action) => {
-  return produce(state, (draft) => {
+const reducer = (state = initialState, action) =>
+  produce(state, (draft) => {
     switch (action.type) {
       case LOAD_POST_REQUEST:
         draft.loadPostLoading = true;
@@ -208,6 +212,5 @@ const reducer = (state = initialState, action) => {
         break;
     }
   });
-};
 
 export default reducer;
