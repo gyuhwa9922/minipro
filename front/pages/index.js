@@ -25,13 +25,17 @@ const Home = () => {
       //   document.documentElement.clientHeight,
       //   document.documentElement.scrollHeight
       // );
-      // console.log(
-      //   window.scrollY + document.documentElement.clientHeight ===
-      //     document.documentElement.scrollHeight - 300
-      // );
+      console.log(
+        window.scrollY + document.documentElement.clientHeight ===
+          document.documentElement.scrollHeight - 300
+      );
+      console.log(
+        window.scrollY + document.documentElement.clientHeight,
+        document.documentElement.scrollHeight
+      );
       if (
-        window.scrollY + document.documentElement.clientHeight >
-        document.documentElement.scrollHeight - 300
+        Math.floor(window.scrollY + document.documentElement.clientHeight) ==
+        Math.floor(document.documentElement.scrollHeight)
       ) {
         console.log("범위 안이야");
         if (hasMorePost) {
@@ -45,7 +49,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, [hasMorePost]);
+  }, [hasMorePost, loadPostLoading]);
 
   return (
     <AppLayout>
