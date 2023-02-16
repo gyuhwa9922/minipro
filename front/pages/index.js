@@ -25,20 +25,20 @@ const Home = () => {
       //   document.documentElement.clientHeight,
       //   document.documentElement.scrollHeight
       // );
-      console.log(
-        window.scrollY + document.documentElement.clientHeight ===
-          document.documentElement.scrollHeight - 300
-      );
-      console.log(
-        window.scrollY + document.documentElement.clientHeight,
-        document.documentElement.scrollHeight
-      );
+      // console.log(
+      //   window.scrollY + document.documentElement.clientHeight >
+      //     document.documentElement.scrollHeight - 300
+      // );
+      // console.log(
+      //   Math.floor(window.scrollY + document.documentElement.clientHeight),
+      //   Math.floor(document.documentElement.scrollHeight)
+      // );
       if (
-        Math.floor(window.scrollY + document.documentElement.clientHeight) ==
-        Math.floor(document.documentElement.scrollHeight)
+        window.scrollY + document.documentElement.clientHeight >
+        document.documentElement.scrollHeight - 300
       ) {
         console.log("범위 안이야");
-        if (hasMorePost) {
+        if (hasMorePost && !loadPostLoading) {
           dispatch({
             type: LOAD_POST_REQUEST,
           });
