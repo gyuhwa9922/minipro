@@ -32,7 +32,7 @@ function loadPostAPI(data) {
 function* loadPost(action) {
   try {
     // const result = yield call(loadPostAPI, action.data);
-    yield delay(1000);
+    yield delay(2000);
     yield put({
       type: LOAD_POST_SUCCESS,
       data: generateDummyPost(10),
@@ -44,6 +44,7 @@ function* loadPost(action) {
     });
   }
 }
+
 function addPostAPI(data) {
   return axios.post("/api/post", data);
 }
@@ -121,7 +122,7 @@ function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
 function* watchLoadPost() {
-  yield throttle(5000, LOAD_POST_REQUEST, loadPost);
+  yield throttle(4000, LOAD_POST_REQUEST, loadPost);
 }
 function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost);
