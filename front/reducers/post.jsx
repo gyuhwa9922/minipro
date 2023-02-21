@@ -142,7 +142,7 @@ const dummyComment = (data) => ({
   content: data,
   User: {
     id: 1,
-    nickname: "lgH",
+    nickname: "lgh",
   },
 });
 
