@@ -2,16 +2,34 @@ import React, { useCallback } from "react";
 import { Button } from "antd";
 import { PropTypes } from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../reducers/user";
 
 const FollowButton = ({ post }) => {
-  const { user } = useSelector((state) => state.user);
-  const isFollowing = user && user.Follwing.find((v) => v.id === post.User.id);
+  const dispatch = useDispatch();
+  const { user, followLoading, unfollowLoading } = useSelector(
+    (state) => state.user
+  );
+  const isFollowing =
+    user && user.Followings.find((v) => v.id === post.User.id);
+  console.log(user, user.Followings);
   const onFollow = useCallback(() => {
     if (isFollowing) {
-      dispatch;
+      dispatch({
+        type: UNFOLLOW_REQUEST,
+        data: post.User.id,
+      });
+    } else {
+      dispatch({
+        type: FOLLOW_REQUEST,
+        data: post.User.id,
+      });
     }
-  });
-  return <Button>팔로우</Button>;
+  }, [isFollowing]);
+  return (
+    <Button loading={followLoading || unfollowLoading} onClick={onFollow}>
+      {isFollowing ? "언팔로우" : "팔로우"}
+    </Button>
+  );
 };
 
 FollowButton.propTypes = {
